@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Faculty Ontology Explorer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg:       #0d1117;
+    --surface:  #161b22;
+    --surface2: #1c2333;
+    --border:   #30363d;
+    --accent:   #58a6ff;
+    --accent2:  #3fb950;
+    --warn:     #f78166;
+    --text:     #e6edf3;
+    --muted:    #8b949e;
+    --mono:     "DM Mono", monospace;
+    --sans:     "DM Sans", sans-serif;
+    --serif:    "Playfair Display", serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  /* ── Header ── */
+  header {
+    grid-column: 1 / -1;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .logo {
+    width: 38px; height: 38px;
+    background: linear-gradient(135deg, var(--accent), #a371f7);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  header h1 {
+    font-family: var(--serif);
+    font-size: 20px;
+    color: var(--text);
+    letter-spacing: -0.3px;
+  }
+  header p { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  .stats-bar {
+    margin-left: auto;
+    display: flex;
+    gap: 24px;
+  }
+  .stat {
+    text-align: center;
+  }
+  .stat-value {
+    font-family: var(--mono);
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-top: 3px;
+  }
+
+  /* ── Sidebar ── */
+  aside {
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .sidebar-header {
+    padding: 20px 16px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sidebar-header h2 {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .cq-list {
+    overflow-y: auto;
+    flex: 1;
+    padding: 8px 0;
+  }
+  .cq-list::-webkit-scrollbar { width: 4px; }
+  .cq-list::-webkit-scrollbar-track { background: transparent; }
+  .cq-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  .cq-item {
+    padding: 10px 16px;
+    cursor: pointer;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .cq-item:hover { background: var(--surface2); }
+  .cq-item.active {
+    border-left-color: var(--accent);
+    background: var(--surface2);
+  }
+  .cq-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    flex-shrink: 0;
+    margin-top: 1px;
+    width: 20px;
+  }
+  .cq-text {
+    font-size: 12.5px;
+    color: var(--text);
+    line-height: 1.45;
+  }
+  .cq-item.active .cq-text { color: var(--accent); }
+
+  .sidebar-footer {
+    border-top: 1px solid var(--border);
+    padding: 12px 16px;
+  }
+  .btn-custom {
+    width: 100%;
+    padding: 9px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--muted);
+    font-family: var(--sans);
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  .btn-custom:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(88, 166, 255, 0.06);
+  }
+
+  /* ── Main ── */
+  main {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* Question banner */
+  .question-banner {
+    padding: 24px 32px 20px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .question-banner .cq-badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    background: rgba(88, 166, 255, 0.15);
+    color: var(--accent);
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+  }
+  .question-banner h2 {
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.45;
+    color: var(--text);
+    max-width: 760px;
+  }
+
+  /* Tabs */
+  .tabs {
+    display: flex;
+    gap: 0;
+    padding: 0 32px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+  .tab {
+    padding: 10px 16px;
+    font-size: 12.5px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    color: var(--muted);
+    transition: all 0.15s;
+    user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* Content area */
+  .content {
+    flex: 1;
+    overflow: auto;
+    padding: 24px 32px;
+  }
+  .content::-webkit-scrollbar { width: 6px; }
+  .content::-webkit-scrollbar-track { background: transparent; }
+  .content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  /* Panel */
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* Results */
+  .results-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .badge {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+  .badge-green { background: rgba(63, 185, 80, 0.15); color: var(--accent2); }
+  .badge-blue  { background: rgba(88, 166, 255, 0.15); color: var(--accent); }
+  .badge-red   { background: rgba(247, 129, 102, 0.15); color: var(--warn); }
+
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  th {
+    background: var(--surface2);
+    padding: 10px 14px;
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  td {
+    padding: 9px 14px;
+    border-bottom: 1px solid rgba(48, 54, 61, 0.5);
+    color: var(--text);
+    line-height: 1.4;
+    font-size: 13px;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.025); }
+
+  /* SPARQL view */
+  .sparql-block {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .sparql-header {
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+  }
+  .sparql-header span { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+  .sparql-code {
+    padding: 16px;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    line-height: 1.65;
+    color: var(--text);
+    white-space: pre;
+    overflow-x: auto;
+  }
+  .kw  { color: #ff7b72; }
+  .var { color: #79c0ff; }
+  .pfx { color: #a5d6ff; }
+  .str { color: #a8d58a; }
+  .cmt { color: var(--muted); }
+
+  /* Custom query */
+  .custom-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .custom-wrap label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 6px;
+    display: block;
+    font-family: var(--mono);
+  }
+  textarea {
+    width: 100%;
+    min-height: 220px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text);
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.15s;
+    line-height: 1.6;
+  }
+  textarea:focus { border-color: var(--accent); }
+  .btn-run {
+    align-self: flex-start;
+    padding: 10px 22px;
+    background: var(--accent);
+    color: #0d1117;
+    border: none;
+    border-radius: 8px;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .btn-run:hover { opacity: 0.88; }
+  .btn-run:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* Empty / loading / error states */
+  .state-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 280px;
+    gap: 12px;
+    color: var(--muted);
+    text-align: center;
+  }
+  .state-icon { font-size: 36px; opacity: 0.5; }
+  .state-box p { font-size: 13.5px; }
+  .state-box small { font-size: 12px; }
+  .error-box {
+    background: rgba(247, 129, 102, 0.08);
+    border: 1px solid rgba(247, 129, 102, 0.3);
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--warn);
+    line-height: 1.6;
+  }
+
+  /* Welcome screen */
+  .welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    gap: 16px;
+    text-align: center;
+  }
+  .welcome-icon {
+    width: 64px; height: 64px;
+    background: linear-gradient(135deg, var(--accent), #a371f7);
+    border-radius: 18px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 30px;
+    margin-bottom: 8px;
+  }
+  .welcome h2 {
+    font-family: var(--serif);
+    font-size: 24px;
+    color: var(--text);
+  }
+  .welcome p { font-size: 14px; color: var(--muted); max-width: 420px; line-height: 1.6; }
+
+  /* Spinner */
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .spinner {
+    width: 28px; height: 28px;
+    border: 2px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="logo">🔗</div>
+  <div>
+    <h1>Faculty Ontology Explorer</h1>
+    <p>Semantic Web &amp; Ontology Engineering — RDFLib + Flask</p>
+  </div>
+  <div class="stats-bar" id="statsBar">
+    <div class="stat"><div class="stat-value" id="s-triples">—</div><div class="stat-label">Triples</div></div>
+    <div class="stat"><div class="stat-value" id="s-courses">—</div><div class="stat-label">Courses</div></div>
+    <div class="stat"><div class="stat-value" id="s-programs">—</div><div class="stat-label">Programs</div></div>
+    <div class="stat"><div class="stat-value" id="s-depts">—</div><div class="stat-label">Departments</div></div>
+    <div class="stat"><div class="stat-value" id="s-staff">—</div><div class="stat-label">Staff</div></div>
+    <div class="stat"><div class="stat-value" id="s-students">—</div><div class="stat-label">Students</div></div>
+  </div>
+</header>
+
+<!-- Sidebar -->
+<aside>
+  <div class="sidebar-header">
+    <h2>Competency Questions</h2>
+  </div>
+  <div class="cq-list" id="cqList">
+    <!-- populated by JS -->
+  </div>
+  <div class="sidebar-footer">
+    <button class="btn-custom" onclick="openCustom()">
+      ✏️ Custom SPARQL Query
+    </button>
+  </div>
+</aside>
+
+<!-- Main -->
+<main>
+  <!-- Welcome screen (shown initially) -->
+  <div class="content" id="welcomeScreen">
+    <div class="welcome">
+      <div class="welcome-icon">🧠</div>
+      <h2>Faculty Ontology Explorer</h2>
+      <p>Select a competency question from the sidebar to run its SPARQL query against the faculty ontology, or write your own custom SPARQL query.</p>
+    </div>
+  </div>
+
+  <!-- Query view (shown when a question is selected) -->
+  <div id="queryView" style="display:none; display:flex; flex-direction:column; overflow:hidden; height:100%;">
+    <div class="question-banner">
+      <div class="cq-badge" id="cqBadge">CQ 1</div>
+      <h2 id="cqTitle">Question goes here</h2>
+    </div>
+    <div class="tabs">
+      <div class="tab active" onclick="switchTab('results')">Results</div>
+      <div class="tab" onclick="switchTab('sparql')">SPARQL</div>
+    </div>
+    <div class="content">
+      <div class="panel active" id="panel-results">
+        <div id="resultsContent">
+          <div class="state-box"><div class="spinner"></div><p>Running query…</p></div>
+        </div>
+      </div>
+      <div class="panel" id="panel-sparql">
+        <div class="sparql-block">
+          <div class="sparql-header">
+            <span>SPARQL 1.1</span>
+            <span id="sparqlEndpoint" style="color:var(--accent2)">● RDFLib</span>
+          </div>
+          <div class="sparql-code" id="sparqlCode"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom query view -->
+  <div id="customView" style="display:none; flex-direction:column; overflow:hidden; height:100%;">
+    <div class="question-banner">
+      <div class="cq-badge">CUSTOM</div>
+      <h2>Custom SPARQL Query</h2>
+    </div>
+    <div class="tabs">
+      <div class="tab active">Query Editor</div>
+    </div>
+    <div class="content">
+      <div class="custom-wrap">
+        <div>
+          <label>Write your SPARQL query below. The ontology prefixes are added automatically.</label>
+          <textarea id="customSparql" spellcheck="false" placeholder="SELECT ?name ?email
+WHERE {
+    ?person :hasPersonName ?name ;
+            :hasEmail ?email .
+}
+ORDER BY ?name"></textarea>
+        </div>
+        <button class="btn-run" onclick="runCustom()" id="runBtn">
+          ▶ Run Query
+        </button>
+        <div id="customResults"></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+const BASE = "http://localhost:8000";
+let currentSparql = "";
+let activeTab = "results";
+
+// ── Load stats ──────────────────────────────────────────────────
+async function loadStats() {
+  try {
+    const r = await fetch(`${BASE}/api/stats`);
+    const d = await r.json();
+    document.getElementById("s-triples").textContent  = d.triples.toLocaleString();
+    document.getElementById("s-courses").textContent  = d.courses;
+    document.getElementById("s-programs").textContent = d.programs;
+    document.getElementById("s-depts").textContent    = d.departments;
+    document.getElementById("s-staff").textContent    = d.staff;
+    document.getElementById("s-students").textContent = d.students;
+  } catch(e) { console.warn("Stats error", e); }
+}
+
+// ── Load sidebar ────────────────────────────────────────────────
+async function loadQuestions() {
+  const r = await fetch(`${BASE}/api/questions`);
+  const qs = await r.json();
+  const list = document.getElementById("cqList");
+  qs.forEach(q => {
+    const el = document.createElement("div");
+    el.className = "cq-item";
+    el.dataset.id = q.id;
+    el.innerHTML = `<span class="cq-num">${String(q.id).padStart(2,"0")}</span>
+                    <span class="cq-text">${q.question}</span>`;
+    el.onclick = () => selectQuestion(q.id);
+    list.appendChild(el);
+  });
+}
+
+// ── Select a CQ ────────────────────────────────────────────────
+async function selectQuestion(id) {
+  // Highlight sidebar
+  document.querySelectorAll(".cq-item").forEach(el => el.classList.remove("active"));
+  document.querySelector(`.cq-item[data-id="${id}"]`).classList.add("active");
+
+  // Show query view, hide others
+  document.getElementById("welcomeScreen").style.display = "none";
+  document.getElementById("customView").style.display = "none";
+  const qv = document.getElementById("queryView");
+  qv.style.display = "flex";
+
+  // Update banner
+  document.getElementById("cqBadge").textContent = `CQ ${id}`;
+  const q = document.querySelector(`.cq-item[data-id="${id}"] .cq-text`).textContent;
+  document.getElementById("cqTitle").textContent = q;
+
+  // Reset to results tab
+  switchTab("results");
+  document.getElementById("resultsContent").innerHTML =
+    `<div class="state-box"><div class="spinner"></div><p>Running query…</p></div>`;
+
+  // Fetch
+  try {
+    const r = await fetch(`${BASE}/api/query/${id}`);
+    const d = await r.json();
+    if (d.error) {
+      document.getElementById("resultsContent").innerHTML =
+        `<div class="error-box">Error: ${d.error}</div>`;
+      return;
+    }
+    renderResults(d, "resultsContent");
+    currentSparql = "";  // will be fetched lazily if needed
+
+    // Fetch SPARQL text from the query list for display
+    currentSparql = await getSparql(id);
+    document.getElementById("sparqlCode").innerHTML = highlight(currentSparql);
+  } catch(e) {
+    document.getElementById("resultsContent").innerHTML =
+      `<div class="error-box">Network error: ${e.message}</div>`;
+  }
+}
+
+async function getSparql(id) {
+  try {
+    const r = await fetch(`${BASE}/api/sparql/${id}`);
+    const d = await r.json();
+    console.log(d)
+    return d.sparql || "";
+  } catch { return ""; }
+}
+
+// ── Render results table ────────────────────────────────────────
+function renderResults(d, targetId) {
+  const target = document.getElementById(targetId);
+  if (!d.rows || d.rows.length === 0) {
+    target.innerHTML = `<div class="state-box">
+      <div class="state-icon">📭</div>
+      <p>No results returned.</p>
+      <small>The query executed successfully but matched no data.</small>
+    </div>`;
+    return;
+  }
+
+  const countBadge = `<span class="badge badge-green">${d.count} row${d.count !== 1 ? "s" : ""}</span>`;
+  const labelBadge = `<span class="badge badge-blue">${d.label}</span>`;
+
+  const headers = d.columns.map(c =>
+    `<th>${c.replace(/([A-Z])/g, ' $1').trim()}</th>`).join("");
+
+  const rowsHtml = d.rows.map(row =>
+    `<tr>${d.columns.map(c => `<td>${formatCell(row[c])}</td>`).join("")}</tr>`
+  ).join("");
+
+  target.innerHTML = `
+    <div class="results-meta">${labelBadge}${countBadge}</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr>${headers}</tr></thead>
+        <tbody>${rowsHtml}</tbody>
+      </table>
+    </div>`;
+}
+
+function formatCell(val) {
+  if (!val || val === "—") return `<span style="color:var(--muted)">—</span>`;
+  // Strip long URIs to just the local name
+  if (val.startsWith("http")) {
+    const local = val.split(/[#\/]/).pop();
+    return `<span title="${val}" style="font-family:var(--mono);font-size:12px">${local.replace(/_/g," ")}</span>`;
+  }
+  return val;
+}
+
+// ── SPARQL syntax highlight (simple) ───────────────────────────
+function highlight(code) {
+  code = code
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+  code = code.replace(/"([^"]*)"/g, '<span class="str">"$1"</span>');
+  code = code.replace(/(#[^\n]*)/g, '<span class="cmt">$1</span>');
+  code = code.replace(
+    /\b(SELECT|WHERE|FILTER|ORDER BY|GROUP BY|HAVING|OPTIONAL|DISTINCT|ASC|DESC|AS|COUNT|SUM|PREFIX|BIND|IF|EXISTS)\b/g,
+    '<span class="kw">$1</span>'
+  );
+  code = code.replace(/(\?[a-zA-Z_][a-zA-Z0-9_]*)/g, '<span class="var">$1</span>');
+  code = code.replace(/\b([a-zA-Z_][a-zA-Z0-9_]*)(:[a-zA-Z_][a-zA-Z0-9_]*)/g, '<span class="pfx">$1$2</span>');
+
+  return code;
+}
+
+// ── Tab switching ───────────────────────────────────────────────
+function switchTab(tab) {
+  activeTab = tab;
+  document.querySelectorAll(".tab").forEach((t, i) => {
+    t.classList.toggle("active", (i === 0 && tab === "results") || (i === 1 && tab === "sparql"));
+  });
+  document.getElementById("panel-results").classList.toggle("active", tab === "results");
+  document.getElementById("panel-sparql").classList.toggle("active", tab === "sparql");
+}
+
+// ── Custom query ────────────────────────────────────────────────
+function openCustom() {
+  document.querySelectorAll(".cq-item").forEach(el => el.classList.remove("active"));
+  document.getElementById("welcomeScreen").style.display = "none";
+  document.getElementById("queryView").style.display = "none";
+  document.getElementById("customView").style.display = "flex";
+  document.getElementById("customResults").innerHTML = "";
+}
+
+async function runCustom() {
+  const sparql = document.getElementById("customSparql").value.trim();
+  if (!sparql) return;
+  const btn = document.getElementById("runBtn");
+  btn.disabled = true;
+  btn.textContent = "⏳ Running…";
+  document.getElementById("customResults").innerHTML =
+    `<div class="state-box"><div class="spinner"></div><p>Running query…</p></div>`;
+  try {
+    const r = await fetch(`${BASE}/api/custom`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ sparql })
+    });
+    const d = await r.json();
+    if (d.error) {
+      document.getElementById("customResults").innerHTML =
+        `<div class="error-box">Error: ${d.error}</div>`;
+    } else {
+      renderResults(d, "customResults");
+    }
+  } catch(e) {
+    document.getElementById("customResults").innerHTML =
+      `<div class="error-box">Network error: ${e.message}</div>`;
+  }
+  btn.disabled = false;
+  btn.textContent = "▶ Run Query";
+}
+
+// ── Init ────────────────────────────────────────────────────────
+loadStats();
+loadQuestions();
+</script>
+</body>
+</html>

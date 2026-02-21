@@ -1,0 +1,3232 @@
+@prefix : <http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/faculty_ontology> .
+
+<http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/faculty_ontology> rdf:type owl:Ontology .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled
+<http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#containCourses
+:containCourses rdf:type owl:ObjectProperty ,
+                         owl:AsymmetricProperty ;
+                rdfs:domain [ rdf:type owl:Restriction ;
+                              owl:onProperty :containCourses ;
+                              owl:someValuesFrom :Program
+                            ] ;
+                rdfs:range [ rdf:type owl:Restriction ;
+                             owl:onProperty :containCourses ;
+                             owl:someValuesFrom :Course
+                           ] .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#hasAdvisor
+:hasAdvisor rdf:type owl:ObjectProperty ;
+            owl:inverseOf :isAdvisorOf ;
+            rdfs:domain [ rdf:type owl:Restriction ;
+                          owl:onProperty :hasAdvisor ;
+                          owl:someValuesFrom :PostgraduateStudent
+                        ] ;
+            rdfs:range [ rdf:type owl:Restriction ;
+                         owl:onProperty :hasAdvisor ;
+                         owl:someValuesFrom :AcademicStaff
+                       ] .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#hasEnrolledStudents
+:hasEnrolledStudents rdf:type owl:ObjectProperty ,
+                              owl:AsymmetricProperty ;
+                     rdfs:domain [ rdf:type owl:Restriction ;
+                                   owl:onProperty :hasEnrolledStudents ;
+                                   owl:someValuesFrom :Program
+                                 ] ;
+                     rdfs:range [ rdf:type owl:Restriction ;
+                                  owl:onProperty :hasEnrolledStudents ;
+                                  owl:someValuesFrom :Student
+                                ] .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#hasMember
+:hasMember rdf:type owl:ObjectProperty ;
+           owl:inverseOf :isMemberOf ;
+           rdf:type owl:AsymmetricProperty ;
+           rdfs:domain [ rdf:type owl:Restriction ;
+                         owl:onProperty :hasMember ;
+                         owl:someValuesFrom :Department
+                       ] ;
+           rdfs:range [ rdf:type owl:Restriction ;
+                        owl:onProperty :hasMember ;
+                        owl:someValuesFrom :Person
+                      ] .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#isAdvisorOf
+:isAdvisorOf rdf:type owl:ObjectProperty ;
+             rdfs:domain [ rdf:type owl:Restriction ;
+                           owl:onProperty :isAdvisorOf ;
+                           owl:someValuesFrom :AcademicStaff
+                         ] ;
+             rdfs:range [ rdf:type owl:Restriction ;
+                          owl:onProperty :isAdvisorOf ;
+                          owl:someValuesFrom :Student
+                        ] .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#isCourseOf
+:isCourseOf rdf:type owl:ObjectProperty ;
+            owl:inverseOf :offersCourse ;
+            rdf:type owl:AsymmetricProperty ;
+            rdfs:domain [ rdf:type owl:Restriction ;
+                          owl:onProperty :isCourseOf ;
+                          owl:someValuesFrom :Course
+                        ] ;
+            rdfs:range [ rdf:type owl:Restriction ;
+                         owl:onProperty :isCourseOf ;
+                         owl:someValuesFrom :Department
+                       ] .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#isMemberOf
+:isMemberOf rdf:type owl:ObjectProperty ,
+                     owl:AsymmetricProperty ;
+            rdfs:domain [ rdf:type owl:Restriction ;
+                          owl:onProperty :isMemberOf ;
+                          owl:someValuesFrom :Person
+                        ] ;
+            rdfs:range [ rdf:type owl:Restriction ;
+                         owl:onProperty :isMemberOf ;
+                         owl:someValuesFrom :Department
+                       ] .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#isOfferedBy
+:isOfferedBy rdf:type owl:ObjectProperty ;
+             owl:inverseOf :offersProgram ;
+             rdf:type owl:AsymmetricProperty ;
+             rdfs:domain [ rdf:type owl:Restriction ;
+                           owl:onProperty :isOfferedBy ;
+                           owl:someValuesFrom :Program
+                         ] ;
+             rdfs:range [ rdf:type owl:Restriction ;
+                          owl:onProperty :isOfferedBy ;
+                          owl:someValuesFrom :Department
+                        ] .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#offersCourse
+:offersCourse rdf:type owl:ObjectProperty ,
+                       owl:AsymmetricProperty ;
+              rdfs:domain [ rdf:type owl:Restriction ;
+                            owl:onProperty :offersCourse ;
+                            owl:someValuesFrom :Department
+                          ] ;
+              rdfs:range [ rdf:type owl:Restriction ;
+                           owl:onProperty :offersCourse ;
+                           owl:someValuesFrom :Course
+                         ] .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#offersProgram
+:offersProgram rdf:type owl:ObjectProperty ,
+                        owl:AsymmetricProperty ;
+               rdfs:domain [ rdf:type owl:Restriction ;
+                             owl:onProperty :offersProgram ;
+                             owl:someValuesFrom :Department
+                           ] ;
+               rdfs:range [ rdf:type owl:Restriction ;
+                            owl:onProperty :offersProgram ;
+                            owl:someValuesFrom :Program
+                          ] .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#teaches
+:teaches rdf:type owl:ObjectProperty ,
+                  owl:AsymmetricProperty ;
+         rdfs:domain [ rdf:type owl:Restriction ;
+                       owl:onProperty :teaches ;
+                       owl:someValuesFrom :AcademicStaff
+                     ] ;
+         rdfs:range [ rdf:type owl:Restriction ;
+                      owl:onProperty :teaches ;
+                      owl:someValuesFrom :Course
+                    ] .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#hasCourseCode
+:hasCourseCode rdf:type owl:DatatypeProperty ,
+                        owl:FunctionalProperty ;
+               rdfs:domain :Course ;
+               rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#hasCourseName
+:hasCourseName rdf:type owl:DatatypeProperty ,
+                        owl:FunctionalProperty ;
+               rdfs:domain :Course ;
+               rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#hasCourseType
+:hasCourseType rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Course ;
+               rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#hasEmail
+:hasEmail rdf:type owl:DatatypeProperty ,
+                   owl:FunctionalProperty ;
+          rdfs:domain :Person ;
+          rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#hasGrade
+:hasGrade rdf:type owl:DatatypeProperty ,
+                   owl:FunctionalProperty .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#hasLabHours
+:hasLabHours rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Course ;
+             rdfs:range xsd:integer .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#hasLectureHours
+:hasLectureHours rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :Course ;
+                 rdfs:range xsd:integer .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#hasNumberOfCredits
+:hasNumberOfCredits rdf:type owl:DatatypeProperty ;
+                    rdfs:domain :Course ;
+                    rdfs:range xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#hasPersonName
+:hasPersonName rdf:type owl:DatatypeProperty ,
+                        owl:FunctionalProperty ;
+               rdfs:domain :Person ;
+               rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#hasPosition
+:hasPosition rdf:type owl:DatatypeProperty ;
+             rdfs:domain :AcademicStaff ;
+             rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#hasProgramDuration
+:hasProgramDuration rdf:type owl:DatatypeProperty ;
+                    rdfs:domain :Program ;
+                    rdfs:range xsd:integer .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#hasProgramName
+:hasProgramName rdf:type owl:DatatypeProperty ,
+                         owl:FunctionalProperty ;
+                rdfs:domain :Program ;
+                rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#hasRegistrationNumber
+:hasRegistrationNumber rdf:type owl:DatatypeProperty ,
+                                owl:FunctionalProperty ;
+                       rdfs:domain :Student ;
+                       rdfs:range xsd:string .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#AcademicStaff
+:AcademicStaff rdf:type owl:Class ;
+               rdfs:subClassOf :Person ;
+               owl:disjointWith :Student .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#Course
+:Course rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#Department
+:Department rdf:type owl:Class ;
+            owl:disjointWith :Person ,
+                             :Program .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#Person
+:Person rdf:type owl:Class ;
+        owl:disjointWith :Program .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#PostgraduateProgram
+:PostgraduateProgram rdf:type owl:Class ;
+                     rdfs:subClassOf :Program ;
+                     owl:disjointWith :UndergraduateProgram .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#PostgraduateStudent
+:PostgraduateStudent rdf:type owl:Class ;
+                     owl:equivalentClass [ owl:intersectionOf ( :Student
+                                                                [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty :hasEnrolledStudents ;
+                                                                  owl:allValuesFrom :PostgraduateProgram
+                                                                ]
+                                                              ) ;
+                                           rdf:type owl:Class
+                                         ] ;
+                     rdfs:subClassOf :Student ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :hasAdvisor ;
+                                       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                       owl:onClass :AcademicStaff
+                                     ] ;
+                     owl:disjointWith :UndergraduateStudent .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#Program
+:Program rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#Student
+:Student rdf:type owl:Class ;
+         rdfs:subClassOf :Person .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#UndergraduateProgram
+:UndergraduateProgram rdf:type owl:Class ;
+                      rdfs:subClassOf :Program .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#UndergraduateStudent
+:UndergraduateStudent rdf:type owl:Class ;
+                      owl:equivalentClass [ owl:intersectionOf ( :Student
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :hasEnrolledStudents ;
+                                                                   owl:allValuesFrom :UndergraduateProgram
+                                                                 ]
+                                                               ) ;
+                                            rdf:type owl:Class
+                                          ] ;
+                      rdfs:subClassOf :Student ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty :hasAdvisor ;
+                                        owl:maxCardinality "0"^^xsd:nonNegativeInteger
+                                      ] .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/faculty_ontology#Bsc_(Hons)_in_Artificial_Intelligence
+<http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/faculty_ontology#Bsc_(Hons)_in_Artificial_Intelligence> rdf:type owl:NamedIndividual ,
+                                                                                                                                 :UndergraduateProgram ;
+                                                                                                                        :containCourses :CM1210 ,
+                                                                                                                                        :CM1220 ,
+                                                                                                                                        :CM1230 ,
+                                                                                                                                        :CM1310 ,
+                                                                                                                                        :CM1410 ,
+                                                                                                                                        :CM1900 ,
+                                                                                                                                        :CM2320 ,
+                                                                                                                                        :CM2420 ,
+                                                                                                                                        :CM2510 ,
+                                                                                                                                        :CM2520 ,
+                                                                                                                                        :CM2900 ,
+                                                                                                                                        :CM3000 ,
+                                                                                                                                        :CM3130 ,
+                                                                                                                                        :CM3230 ,
+                                                                                                                                        :CM3250 ,
+                                                                                                                                        :CM3340 ,
+                                                                                                                                        :CM3430 ,
+                                                                                                                                        :CM3530 ,
+                                                                                                                                        :CM3540 ,
+                                                                                                                                        :CM3610 ,
+                                                                                                                                        :CM3620 ,
+                                                                                                                                        :CM3630 ,
+                                                                                                                                        :CM3640 ,
+                                                                                                                                        :CM3710 ,
+                                                                                                                                        :CM3720 ,
+                                                                                                                                        :CM3810 ,
+                                                                                                                                        :CM3820 ,
+                                                                                                                                        :CM3830 ,
+                                                                                                                                        :CM3900 ,
+                                                                                                                                        :CM4150 ,
+                                                                                                                                        :CM4170 ,
+                                                                                                                                        :CM4180 ,
+                                                                                                                                        :CM4240 ,
+                                                                                                                                        :CM4250 ,
+                                                                                                                                        :CM4260 ,
+                                                                                                                                        :CM4270 ,
+                                                                                                                                        :CM4280 ,
+                                                                                                                                        :CM4290 ,
+                                                                                                                                        :CM4440 ,
+                                                                                                                                        :CM4450 ,
+                                                                                                                                        :CM4460 ,
+                                                                                                                                        :CM4550 ,
+                                                                                                                                        :CM4560 ,
+                                                                                                                                        :CM4650 ,
+                                                                                                                                        :CM4660 ,
+                                                                                                                                        :CM4670 ,
+                                                                                                                                        :CM4680 ,
+                                                                                                                                        :CM4690 ,
+                                                                                                                                        :CM4730 ,
+                                                                                                                                        :CM4740 ,
+                                                                                                                                        :CM4900 ,
+                                                                                                                                        :IN1101 ,
+                                                                                                                                        :IN1111 ,
+                                                                                                                                        :IN1321 ,
+                                                                                                                                        :IN1331 ,
+                                                                                                                                        :IN1401 ,
+                                                                                                                                        :IN1501 ,
+                                                                                                                                        :IN1621 ,
+                                                                                                                                        :IN2101 ,
+                                                                                                                                        :IN2111 ,
+                                                                                                                                        :IN2201 ,
+                                                                                                                                        :IN2211 ,
+                                                                                                                                        :IN2311 ,
+                                                                                                                                        :IN2321 ,
+                                                                                                                                        :IN2401 ,
+                                                                                                                                        :IN2511 ,
+                                                                                                                                        :IN2601 ,
+                                                                                                                                        :IN3101 ,
+                                                                                                                                        :IN3410 ,
+                                                                                                                                        :IN4411 ,
+                                                                                                                                        :IN4521 ,
+                                                                                                                                        :IN4550 ,
+                                                                                                                                        :IN4621 ,
+                                                                                                                                        :IN4630 ,
+                                                                                                                                        :IN4640 ,
+                                                                                                                                        :IN4721 ,
+                                                                                                                                        :IN4770 ,
+                                                                                                                                        :IS1011 ,
+                                                                                                                                        :IS1101 ,
+                                                                                                                                        :IS2200 ,
+                                                                                                                                        :IS3020 ,
+                                                                                                                                        :IS3450 ,
+                                                                                                                                        :IS3610 ,
+                                                                                                                                        :IS3700 ,
+                                                                                                                                        :IS4430 ,
+                                                                                                                                        :IS4600 ;
+                                                                                                                        :hasEnrolledStudents :Student_Gayan_Kumara ;
+                                                                                                                        :hasProgramDuration 4 ;
+                                                                                                                        :hasProgramName "Bsc (Hons) in AI" .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/faculty_ontology#Bsc_(Hons)_in_Information_Technology
+<http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/faculty_ontology#Bsc_(Hons)_in_Information_Technology> rdf:type owl:NamedIndividual ,
+                                                                                                                                :UndergraduateProgram ;
+                                                                                                                       :containCourses :CM1110 ,
+                                                                                                                                       :CM2110 ,
+                                                                                                                                       :CM3110 ,
+                                                                                                                                       :CM3120 ,
+                                                                                                                                       :CM3210 ,
+                                                                                                                                       :CM3310 ,
+                                                                                                                                       :CM3320 ,
+                                                                                                                                       :CM3330 ,
+                                                                                                                                       :CM4110 ,
+                                                                                                                                       :CM4121 ,
+                                                                                                                                       :CM4130 ,
+                                                                                                                                       :CM4140 ,
+                                                                                                                                       :CM4210 ,
+                                                                                                                                       :CM4220 ,
+                                                                                                                                       :CM4230 ,
+                                                                                                                                       :CM4310 ,
+                                                                                                                                       :CM4320 ,
+                                                                                                                                       :CM4330 ,
+                                                                                                                                       :CM4340 ,
+                                                                                                                                       :CM4350 ,
+                                                                                                                                       :CM4360 ,
+                                                                                                                                       :CM4370 ,
+                                                                                                                                       :CM4380 ,
+                                                                                                                                       :CM4390 ,
+                                                                                                                                       :CM4410 ,
+                                                                                                                                       :IN1100 ,
+                                                                                                                                       :IN1310 ,
+                                                                                                                                       :IN1320 ,
+                                                                                                                                       :IN1400 ,
+                                                                                                                                       :IN1500 ,
+                                                                                                                                       :IN1610 ,
+                                                                                                                                       :IN1620 ,
+                                                                                                                                       :IN1900 ,
+                                                                                                                                       :IN2100 ,
+                                                                                                                                       :IN2110 ,
+                                                                                                                                       :IN2200 ,
+                                                                                                                                       :IN2210 ,
+                                                                                                                                       :IN2310 ,
+                                                                                                                                       :IN2320 ,
+                                                                                                                                       :IN2400 ,
+                                                                                                                                       :IN2510 ,
+                                                                                                                                       :IN2600 ,
+                                                                                                                                       :IN2900 ,
+                                                                                                                                       :IN3000 ,
+                                                                                                                                       :IN3100 ,
+                                                                                                                                       :IN3400 ,
+                                                                                                                                       :IN3520 ,
+                                                                                                                                       :IN3600 ,
+                                                                                                                                       :IN3900 ,
+                                                                                                                                       :IN4100 ,
+                                                                                                                                       :IN4110 ,
+                                                                                                                                       :IN4300 ,
+                                                                                                                                       :IN4310 ,
+                                                                                                                                       :IN4400 ,
+                                                                                                                                       :IN4410 ,
+                                                                                                                                       :IN4500 ,
+                                                                                                                                       :IN4510 ,
+                                                                                                                                       :IN4520 ,
+                                                                                                                                       :IN4530 ,
+                                                                                                                                       :IN4540 ,
+                                                                                                                                       :IN4600 ,
+                                                                                                                                       :IN4610 ,
+                                                                                                                                       :IN4620 ,
+                                                                                                                                       :IN4700 ,
+                                                                                                                                       :IN4710 ,
+                                                                                                                                       :IN4720 ,
+                                                                                                                                       :IN4730 ,
+                                                                                                                                       :IN4910 ,
+                                                                                                                                       :IN4920 ,
+                                                                                                                                       :IS1010 ,
+                                                                                                                                       :IS1020 ,
+                                                                                                                                       :IS1030 ,
+                                                                                                                                       :IS1100 ,
+                                                                                                                                       :IS1210 ,
+                                                                                                                                       :IS2010 ,
+                                                                                                                                       :IS2210 ,
+                                                                                                                                       :IS2220 ,
+                                                                                                                                       :IS2300 ,
+                                                                                                                                       :IS3010 ,
+                                                                                                                                       :IS3100 ,
+                                                                                                                                       :IS3230 ,
+                                                                                                                                       :IS3400 ,
+                                                                                                                                       :IS3420 ,
+                                                                                                                                       :IS3430 ,
+                                                                                                                                       :IS3440 ,
+                                                                                                                                       :IS3710 ,
+                                                                                                                                       :IS4010 ,
+                                                                                                                                       :IS4200 ,
+                                                                                                                                       :IS4210 ,
+                                                                                                                                       :IS4300 ,
+                                                                                                                                       :IS4310 ,
+                                                                                                                                       :IS4320 ,
+                                                                                                                                       :IS4330 ,
+                                                                                                                                       :IS4340 ,
+                                                                                                                                       :IS4400 ,
+                                                                                                                                       :IS4410 ,
+                                                                                                                                       :IS4420 ,
+                                                                                                                                       :IS4450 ,
+                                                                                                                                       :IS4510 ,
+                                                                                                                                       :IS4610 ,
+                                                                                                                                       :IS4710 ;
+                                                                                                                       :hasEnrolledStudents :Student_Tharindu_Bandara ;
+                                                                                                                       :hasProgramDuration 4 ;
+                                                                                                                       :hasProgramName "Bsc (Hons) in IT" .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/faculty_ontology#Bsc_(Hons)_in_Information_Technology_and_Management
+<http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/faculty_ontology#Bsc_(Hons)_in_Information_Technology_and_Management> rdf:type owl:NamedIndividual ,
+                                                                                                                                               :UndergraduateProgram ;
+                                                                                                                                      :containCourses :CM1120 ,
+                                                                                                                                                      :CM1130 ,
+                                                                                                                                                      :CM2120 ,
+                                                                                                                                                      :CM2130 ,
+                                                                                                                                                      :CM3110 ,
+                                                                                                                                                      :CM3120 ,
+                                                                                                                                                      :CM3210 ,
+                                                                                                                                                      :CM3310 ,
+                                                                                                                                                      :CM3320 ,
+                                                                                                                                                      :CM3330 ,
+                                                                                                                                                      :CM4110 ,
+                                                                                                                                                      :CM4121 ,
+                                                                                                                                                      :CM4130 ,
+                                                                                                                                                      :CM4140 ,
+                                                                                                                                                      :CM4210 ,
+                                                                                                                                                      :CM4220 ,
+                                                                                                                                                      :CM4230 ,
+                                                                                                                                                      :CM4310 ,
+                                                                                                                                                      :CM4320 ,
+                                                                                                                                                      :CM4330 ,
+                                                                                                                                                      :CM4340 ,
+                                                                                                                                                      :CM4350 ,
+                                                                                                                                                      :CM4360 ,
+                                                                                                                                                      :CM4370 ,
+                                                                                                                                                      :CM4380 ,
+                                                                                                                                                      :CM4390 ,
+                                                                                                                                                      :CM4410 ,
+                                                                                                                                                      :IN1100 ,
+                                                                                                                                                      :IN1300 ,
+                                                                                                                                                      :IN1400 ,
+                                                                                                                                                      :IN1600 ,
+                                                                                                                                                      :IN2100 ,
+                                                                                                                                                      :IN2110 ,
+                                                                                                                                                      :IN2200 ,
+                                                                                                                                                      :IN2210 ,
+                                                                                                                                                      :IN2300 ,
+                                                                                                                                                      :IN2310 ,
+                                                                                                                                                      :IN2400 ,
+                                                                                                                                                      :IN2500 ,
+                                                                                                                                                      :IN2600 ,
+                                                                                                                                                      :IN3100 ,
+                                                                                                                                                      :IN3400 ,
+                                                                                                                                                      :IN3500 ,
+                                                                                                                                                      :IN3600 ,
+                                                                                                                                                      :IN4100 ,
+                                                                                                                                                      :IN4400 ,
+                                                                                                                                                      :IN4410 ,
+                                                                                                                                                      :IN4530 ,
+                                                                                                                                                      :IN4600 ,
+                                                                                                                                                      :IN4700 ,
+                                                                                                                                                      :IN4710 ,
+                                                                                                                                                      :IN4720 ,
+                                                                                                                                                      :IS1000 ,
+                                                                                                                                                      :IS1010 ,
+                                                                                                                                                      :IS1020 ,
+                                                                                                                                                      :IS1100 ,
+                                                                                                                                                      :IS1210 ,
+                                                                                                                                                      :IS1400 ,
+                                                                                                                                                      :IS1900 ,
+                                                                                                                                                      :IS2000 ,
+                                                                                                                                                      :IS2010 ,
+                                                                                                                                                      :IS2210 ,
+                                                                                                                                                      :IS2220 ,
+                                                                                                                                                      :IS2300 ,
+                                                                                                                                                      :IS2900 ,
+                                                                                                                                                      :IS3000 ,
+                                                                                                                                                      :IS3010 ,
+                                                                                                                                                      :IS3100 ,
+                                                                                                                                                      :IS3110 ,
+                                                                                                                                                      :IS3230 ,
+                                                                                                                                                      :IS3400 ,
+                                                                                                                                                      :IS3420 ,
+                                                                                                                                                      :IS3430 ,
+                                                                                                                                                      :IS3440 ,
+                                                                                                                                                      :IS3710 ,
+                                                                                                                                                      :IS3910 ,
+                                                                                                                                                      :IS4010 ,
+                                                                                                                                                      :IS4200 ,
+                                                                                                                                                      :IS4210 ,
+                                                                                                                                                      :IS4230 ,
+                                                                                                                                                      :IS4300 ,
+                                                                                                                                                      :IS4310 ,
+                                                                                                                                                      :IS4320 ,
+                                                                                                                                                      :IS4330 ,
+                                                                                                                                                      :IS4340 ,
+                                                                                                                                                      :IS4400 ,
+                                                                                                                                                      :IS4410 ,
+                                                                                                                                                      :IS4420 ,
+                                                                                                                                                      :IS4450 ,
+                                                                                                                                                      :IS4510 ,
+                                                                                                                                                      :IS4610 ,
+                                                                                                                                                      :IS4710 ,
+                                                                                                                                                      :IS4910 ,
+                                                                                                                                                      :IS4920 ;
+                                                                                                                                      :hasEnrolledStudents :Student_Sanduni_Wijeratne ;
+                                                                                                                                      :hasProgramDuration 4 ;
+                                                                                                                                      :hasProgramName "Bsc (Hons) in ITM" .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM1110
+:CM1110 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM1110" ;
+        :hasCourseName "Fundamentals of Mathematics and Statistics" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 3 ;
+        :hasLectureHours 3 ;
+        :hasNumberOfCredits "4.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM1120
+:CM1120 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM1120" ;
+        :hasCourseName "Essentials of Mathematics" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM1130
+:CM1130 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM1130" ;
+        :hasCourseName "Elements of Statistics" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM1210
+:CM1210 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM1210" ;
+        :hasCourseName "Introduction to Intelligent Machines" ;
+        :hasCourseType "Core" ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM1220
+:CM1220 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM1220" ;
+        :hasCourseName "Fundamentals of Machines" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 1 ;
+        :hasNumberOfCredits "2.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM1230
+:CM1230 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM1230" ;
+        :hasCourseName "Foundations of Artificial Intelligence" ;
+        :hasCourseType "Core" ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM1310
+:CM1310 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM1310" ;
+        :hasCourseName "Linear Algebra and Calculus" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "3.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM1410
+:CM1410 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM1410" ;
+        :hasCourseName "Probability and Statistics" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "3.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM1900
+:CM1900 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM1900" ;
+        :hasCourseName "Intelligent Machines Inspirational Project" ;
+        :hasCourseType "Core" ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM2110
+:CM2110 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM2110" ;
+        :hasCourseName "Calculus and Statistical Distributions" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 3 ;
+        :hasLectureHours 3 ;
+        :hasNumberOfCredits "4.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM2120
+:CM2120 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM2120" ;
+        :hasCourseName "Calculus" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM2130
+:CM2130 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM2130" ;
+        :hasCourseName "Statistical Distributions and Estimation" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM2320
+:CM2320 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM2320" ;
+        :hasCourseName "Mathematical Methods" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM2420
+:CM2420 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM2420" ;
+        :hasCourseName "Statistical Inference" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "3.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM2510
+:CM2510 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM2510" ;
+        :hasCourseName "Modern Approach to Artificial Intelligence" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM2520
+:CM2520 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM2520" ;
+        :hasCourseName "Deductive Reasoning and Logic Programming" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM2900
+:CM2900 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM2900" ;
+        :hasCourseName "Industry Based AI Software Project" ;
+        :hasCourseType "Core" ;
+        :hasNumberOfCredits "3.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM3000
+:CM3000 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM3000" ;
+        :hasCourseName "Industrial Training" ;
+        :hasCourseType "Core" ;
+        :hasNumberOfCredits "6.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM3110
+:CM3110 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM3110" ;
+        :hasCourseName "Computational Mathematics" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM3120
+:CM3120 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM3120" ;
+        :hasCourseName "Computational Statistics" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM3130
+:CM3130 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM3130" ;
+        :hasCourseName "Operations Research" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM3210
+:CM3210 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM3210" ;
+        :hasCourseName "Automata Theory" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM3230
+:CM3230 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM3230" ;
+        :hasCourseName "Automata Theory" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM3250
+:CM3250 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM3250" ;
+        :hasCourseName "Fundamentals of Visual Communication Design" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM3310
+:CM3310 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM3310" ;
+        :hasCourseName "Artificial Intelligence" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM3320
+:CM3320 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM3320" ;
+        :hasCourseName "Logic Programming and Artificial Cognitive Systems" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM3330
+:CM3330 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM3330" ;
+        :hasCourseName "Fundamentals of Bioinformatics" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM3340
+:CM3340 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM3340" ;
+        :hasCourseName "Numerical Analysis" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM3430
+:CM3430 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM3430" ;
+        :hasCourseName "Computational Statistics" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM3530
+:CM3530 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM3530" ;
+        :hasCourseName "Research Methods" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM3540
+:CM3540 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM3540" ;
+        :hasCourseName "Bioinformatics" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM3610
+:CM3610 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM3610" ;
+        :hasCourseName "Expert Systems" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM3620
+:CM3620 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM3620" ;
+        :hasCourseName "Natural Language Processing" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM3630
+:CM3630 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM3630" ;
+        :hasCourseName "Multi Agent Systems" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM3640
+:CM3640 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM3640" ;
+        :hasCourseName "Artificial Cognitive Systems" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM3710
+:CM3710 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM3710" ;
+        :hasCourseName "Artificial Neural Networks" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM3720
+:CM3720 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM3720" ;
+        :hasCourseName "Machine Learning" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM3810
+:CM3810 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM3810" ;
+        :hasCourseName "Fuzzy Logic" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM3820
+:CM3820 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM3820" ;
+        :hasCourseName "Evolutionary Computing" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM3830
+:CM3830 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM3830" ;
+        :hasCourseName "Rough Set Theory" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM3900
+:CM3900 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM3900" ;
+        :hasCourseName "Independent Study in AI" ;
+        :hasCourseType "Core" ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4110
+:CM4110 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4110" ;
+        :hasCourseName "Advanced Topics in Mathematics" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4121
+:CM4121 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4121" ;
+        :hasCourseName "Advanced Topics in Statistics" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4130
+:CM4130 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4130" ;
+        :hasCourseName "Mathematical Modelling" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4140
+:CM4140 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4140" ;
+        :hasCourseName "Operational Research" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4150
+:CM4150 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4150" ;
+        :hasCourseName "Recommender Systems" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4170
+:CM4170 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4170" ;
+        :hasCourseName "Abstract Algebraic Structures" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4180
+:CM4180 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4180" ;
+        :hasCourseName "Mathematical Modelling" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4210
+:CM4210 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4210" ;
+        :hasCourseName "Theory of Computability and Complexity" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4220
+:CM4220 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4220" ;
+        :hasCourseName "Theory of Compilers" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4230
+:CM4230 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4230" ;
+        :hasCourseName "Formal Methods and Software Verification" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4240
+:CM4240 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4240" ;
+        :hasCourseName "Robotics" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4250
+:CM4250 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4250" ;
+        :hasCourseName "Affective Computing" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4260
+:CM4260 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4260" ;
+        :hasCourseName "Machine Translations" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4270
+:CM4270 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4270" ;
+        :hasCourseName "Theory of Computability and Complexity" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4280
+:CM4280 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4280" ;
+        :hasCourseName "Theory of Compilers" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4290
+:CM4290 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4290" ;
+        :hasCourseName "Swarm Intelligence" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4310
+:CM4310 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4310" ;
+        :hasCourseName "Artificial Neural Networks and Evolutionary Computing" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4320
+:CM4320 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4320" ;
+        :hasCourseName "Complex Systems and Agent Technology" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4330
+:CM4330 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4330" ;
+        :hasCourseName "Semantic Web and Ontological Modelling" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4340
+:CM4340 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4340" ;
+        :hasCourseName "Natural Language Processing" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4350
+:CM4350 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4350" ;
+        :hasCourseName "Fuzzy Logic" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4360
+:CM4360 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4360" ;
+        :hasCourseName "Robotics" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4370
+:CM4370 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4370" ;
+        :hasCourseName "Machine Learning and Pattern Recognition" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4380
+:CM4380 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4380" ;
+        :hasCourseName "Deep Learning Architectures" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4390
+:CM4390 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4390" ;
+        :hasCourseName "Advanced Topics in Bioinformatics" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4410
+:CM4410 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4410" ;
+        :hasCourseName "Reinforcement Learning" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4440
+:CM4440 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4440" ;
+        :hasCourseName "Advanced Statistical Modelling" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4450
+:CM4450 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4450" ;
+        :hasCourseName "Computational Bayesian Statistics" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4460
+:CM4460 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4460" ;
+        :hasCourseName "Time Series Analysis and Forecasting" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4550
+:CM4550 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4550" ;
+        :hasCourseName "Distributed Computing for AI" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4560
+:CM4560 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4560" ;
+        :hasCourseName "Philosophy of Science" ;
+        :hasCourseType "Core" ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4650
+:CM4650 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4650" ;
+        :hasCourseName "Semantic Web and Ontological Modelling" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4660
+:CM4660 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4660" ;
+        :hasCourseName "Speech Processing" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4670
+:CM4670 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4670" ;
+        :hasCourseName "Quantum Computing" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4680
+:CM4680 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4680" ;
+        :hasCourseName "Neuroscience for Artificial Intelligence" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4690
+:CM4690 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4690" ;
+        :hasCourseName "Introduction to Agent-based Modelling" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4730
+:CM4730 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4730" ;
+        :hasCourseName "Deep Learning" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4740
+:CM4740 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4740" ;
+        :hasCourseName "Deep Reinforcement Learning" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#CM4900
+:CM4900 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "CM4900" ;
+        :hasCourseName "Research Project in AI" ;
+        :hasCourseType "Core" ;
+        :hasNumberOfCredits "10.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#Department_of_Computational_Mathematics
+:Department_of_Computational_Mathematics rdf:type owl:NamedIndividual ,
+                                                  :Department ;
+                                         :offersCourse :CM1110 ,
+                                                       :CM1120 ,
+                                                       :CM1130 ,
+                                                       :CM1210 ,
+                                                       :CM1220 ,
+                                                       :CM1230 ,
+                                                       :CM1310 ,
+                                                       :CM1410 ,
+                                                       :CM1900 ,
+                                                       :CM2110 ,
+                                                       :CM2120 ,
+                                                       :CM2130 ,
+                                                       :CM2320 ,
+                                                       :CM2420 ,
+                                                       :CM2510 ,
+                                                       :CM2520 ,
+                                                       :CM2900 ,
+                                                       :CM3000 ,
+                                                       :CM3110 ,
+                                                       :CM3120 ,
+                                                       :CM3130 ,
+                                                       :CM3210 ,
+                                                       :CM3230 ,
+                                                       :CM3250 ,
+                                                       :CM3310 ,
+                                                       :CM3320 ,
+                                                       :CM3330 ,
+                                                       :CM3340 ,
+                                                       :CM3430 ,
+                                                       :CM3530 ,
+                                                       :CM3540 ,
+                                                       :CM3610 ,
+                                                       :CM3620 ,
+                                                       :CM3630 ,
+                                                       :CM3640 ,
+                                                       :CM3710 ,
+                                                       :CM3720 ,
+                                                       :CM3810 ,
+                                                       :CM3820 ,
+                                                       :CM3830 ,
+                                                       :CM3900 ,
+                                                       :CM4110 ,
+                                                       :CM4121 ,
+                                                       :CM4130 ,
+                                                       :CM4140 ,
+                                                       :CM4150 ,
+                                                       :CM4170 ,
+                                                       :CM4180 ,
+                                                       :CM4210 ,
+                                                       :CM4220 ,
+                                                       :CM4230 ,
+                                                       :CM4240 ,
+                                                       :CM4250 ,
+                                                       :CM4260 ,
+                                                       :CM4270 ,
+                                                       :CM4280 ,
+                                                       :CM4290 ,
+                                                       :CM4310 ,
+                                                       :CM4320 ,
+                                                       :CM4330 ,
+                                                       :CM4340 ,
+                                                       :CM4350 ,
+                                                       :CM4360 ,
+                                                       :CM4370 ,
+                                                       :CM4380 ,
+                                                       :CM4390 ,
+                                                       :CM4410 ,
+                                                       :CM4440 ,
+                                                       :CM4450 ,
+                                                       :CM4460 ,
+                                                       :CM4550 ,
+                                                       :CM4560 ,
+                                                       :CM4650 ,
+                                                       :CM4660 ,
+                                                       :CM4670 ,
+                                                       :CM4680 ,
+                                                       :CM4690 ,
+                                                       :CM4730 ,
+                                                       :CM4740 ,
+                                                       :CM4900 ,
+                                                       :IN1331 ;
+                                         :offersProgram <http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/faculty_ontology#Bsc_(Hons)_in_Artificial_Intelligence> ,
+                                                        :Msc_in_Artificial_Intelligence .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#Department_of_Information_Technology
+:Department_of_Information_Technology rdf:type owl:NamedIndividual ,
+                                               :Department ;
+                                      :offersCourse :IN1101 ,
+                                                    :IN1111 ,
+                                                    :IN1300 ,
+                                                    :IN1310 ,
+                                                    :IN1320 ,
+                                                    :IN1321 ,
+                                                    :IN1400 ,
+                                                    :IN1401 ,
+                                                    :IN1500 ,
+                                                    :IN1501 ,
+                                                    :IN1600 ,
+                                                    :IN1610 ,
+                                                    :IN1620 ,
+                                                    :IN1621 ,
+                                                    :IN1900 ,
+                                                    :IN2100 ,
+                                                    :IN2101 ,
+                                                    :IN2110 ,
+                                                    :IN2200 ,
+                                                    :IN2201 ,
+                                                    :IN2210 ,
+                                                    :IN2211 ,
+                                                    :IN2300 ,
+                                                    :IN2310 ,
+                                                    :IN2311 ,
+                                                    :IN2320 ,
+                                                    :IN2321 ,
+                                                    :IN2400 ,
+                                                    :IN2401 ,
+                                                    :IN2500 ,
+                                                    :IN2510 ,
+                                                    :IN2511 ,
+                                                    :IN2600 ,
+                                                    :IN2601 ,
+                                                    :IN2900 ,
+                                                    :IN3000 ,
+                                                    :IN3100 ,
+                                                    :IN3101 ,
+                                                    :IN3400 ,
+                                                    :IN3410 ,
+                                                    :IN3520 ,
+                                                    :IN3600 ,
+                                                    :IN3900 ,
+                                                    :IN4100 ,
+                                                    :IN4110 ,
+                                                    :IN4300 ,
+                                                    :IN4310 ,
+                                                    :IN4400 ,
+                                                    :IN4410 ,
+                                                    :IN4411 ,
+                                                    :IN4500 ,
+                                                    :IN4510 ,
+                                                    :IN4520 ,
+                                                    :IN4521 ,
+                                                    :IN4530 ,
+                                                    :IN4540 ,
+                                                    :IN4550 ,
+                                                    :IN4600 ,
+                                                    :IN4610 ,
+                                                    :IN4620 ,
+                                                    :IN4621 ,
+                                                    :IN4630 ,
+                                                    :IN4640 ,
+                                                    :IN4700 ,
+                                                    :IN4710 ,
+                                                    :IN4720 ,
+                                                    :IN4721 ,
+                                                    :IN4730 ,
+                                                    :IN4770 ,
+                                                    :IN4910 ,
+                                                    :IN4920 ;
+                                      :offersProgram <http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/faculty_ontology#Bsc_(Hons)_in_Information_Technology> ,
+                                                     :Msc_in_Information_Technology .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#Department_of_Interdisciplinary_Studies
+:Department_of_Interdisciplinary_Studies rdf:type owl:NamedIndividual ,
+                                                  :Department ;
+                                         :offersCourse :IS1000 ,
+                                                       :IS1011 ,
+                                                       :IS1020 ,
+                                                       :IS1030 ,
+                                                       :IS1101 ,
+                                                       :IS1210 ,
+                                                       :IS1400 ,
+                                                       :IS1900 ,
+                                                       :IS2000 ,
+                                                       :IS2010 ,
+                                                       :IS2200 ,
+                                                       :IS2210 ,
+                                                       :IS2220 ,
+                                                       :IS2300 ,
+                                                       :IS2900 ,
+                                                       :IS3000 ,
+                                                       :IS3010 ,
+                                                       :IS3020 ,
+                                                       :IS3100 ,
+                                                       :IS3110 ,
+                                                       :IS3230 ,
+                                                       :IS3400 ,
+                                                       :IS3420 ,
+                                                       :IS3430 ,
+                                                       :IS3440 ,
+                                                       :IS3450 ,
+                                                       :IS3610 ,
+                                                       :IS3700 ,
+                                                       :IS3710 ,
+                                                       :IS3910 ,
+                                                       :IS4010 ,
+                                                       :IS4200 ,
+                                                       :IS4210 ,
+                                                       :IS4230 ,
+                                                       :IS4300 ,
+                                                       :IS4310 ,
+                                                       :IS4320 ,
+                                                       :IS4330 ,
+                                                       :IS4340 ,
+                                                       :IS4400 ,
+                                                       :IS4410 ,
+                                                       :IS4420 ,
+                                                       :IS4430 ,
+                                                       :IS4450 ,
+                                                       :IS4510 ,
+                                                       :IS4600 ,
+                                                       :IS4610 ,
+                                                       :IS4710 ,
+                                                       :IS4910 ,
+                                                       :IS4920 ;
+                                         :offersProgram <http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/faculty_ontology#Bsc_(Hons)_in_Information_Technology_and_Management> .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#Dr_Kasun_Fernando
+:Dr_Kasun_Fernando rdf:type owl:NamedIndividual ,
+                            :AcademicStaff ;
+                   :isMemberOf :Department_of_Information_Technology ;
+                   :teaches :IN2401 ,
+                            :IN3410 ;
+                   :hasEmail "kasun.fernando@faculty.edu" ;
+                   :hasPersonName "Kasun Fernando" ;
+                   :hasPosition "Senior Lecturer" .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#Dr_Nishani_Silva
+:Dr_Nishani_Silva rdf:type owl:NamedIndividual ,
+                           :AcademicStaff ;
+                  :isMemberOf :Department_of_Computational_Mathematics ;
+                  :teaches :CM1230 ,
+                           :CM2510 ,
+                           :CM3610 ;
+                  :hasEmail "nishani.silva@faculty.edu" ;
+                  :hasPersonName "Nishani Silva" ;
+                  :hasPosition "Senior Lecturer" .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN1100
+:IN1100 rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN1101
+:IN1101 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN1101" ;
+        :hasCourseName "Programming Fundamentals" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 3 ;
+        :hasNumberOfCredits "4.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN1111
+:IN1111 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN1111" ;
+        :hasCourseName "Data Structures and Algorithms I" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN1300
+:IN1300 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN1300" ;
+        :hasCourseName "Digital Fundamentals and Computer Systems" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN1310
+:IN1310 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN1310" ;
+        :hasCourseName "Digital Systems and Computer Hardware" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 3 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "3.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN1320
+:IN1320 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN1320" ;
+        :hasCourseName "Computer Organization" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN1321
+:IN1321 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN1321" ;
+        :hasCourseName "Computer Organization" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN1331
+:IN1331 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN1331" ;
+        :hasCourseName "Microcontroller Based System Design" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "3.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN1400
+:IN1400 rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN1401
+:IN1401 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN1401" ;
+        :hasCourseName "Fundamentals of Databases" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN1500
+:IN1500 rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN1501
+:IN1501 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN1501" ;
+        :hasCourseName "Data Communication" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN1600
+:IN1600 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN1600" ;
+        :hasCourseName "Essentials of Multimedia and Web Technologies" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 3 ;
+        :hasLectureHours 3 ;
+        :hasNumberOfCredits "4.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN1610
+:IN1610 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN1610" ;
+        :hasCourseName "Multimedia Technologies" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN1620
+:IN1620 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN1620" ;
+        :hasCourseName "Web Technologies" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN1621
+:IN1621 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN1621" ;
+        :hasCourseName "Web Technologies" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "3.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN1900
+:IN1900 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN1900" ;
+        :hasCourseName "ICT Project" ;
+        :hasCourseType "Core" ;
+        :hasNumberOfCredits "2.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN2000
+:IN2000 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS2000" ;
+        :hasCourseName "Industry Visits" ;
+        :hasCourseType "Core" ;
+        :hasNumberOfCredits "1.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN2100
+:IN2100 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN2100" ;
+        :hasCourseName "Object Oriented Programming" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 3 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "3.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN2101
+:IN2101 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN2101" ;
+        :hasCourseName "Object-Oriented Programming" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "3.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN2110
+:IN2110 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN2110" ;
+        :hasCourseName "Data Structures and Algorithms" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN2111
+:IN2111 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN2111" ;
+        :hasCourseName "Data Structures and Algorithms II" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN2200
+:IN2200 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN2200" ;
+        :hasCourseName "Software Engineering Methods" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 3 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "3.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN2201
+:IN2201 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN2201" ;
+        :hasCourseName "Software Engineering" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN2210
+:IN2210 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN2210" ;
+        :hasCourseName "Object Oriented Analysis and Design" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN2211
+:IN2211 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN2211" ;
+        :hasCourseName "Object-oriented Analysis and Design" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN2300
+:IN2300 rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN2310
+:IN2310 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN2310" ;
+        :hasCourseName "Operating Systems" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN2311
+:IN2311 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN2311" ;
+        :hasCourseName "Operating Systems" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN2320
+:IN2320 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN2320" ;
+        :hasCourseName "Computer Architecture" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN2321
+:IN2321 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN2321" ;
+        :hasCourseName "Computer Architecture" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN2400
+:IN2400 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN2400" ;
+        :hasCourseName "Database Management Systems" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN2401
+:IN2401 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN2401" ;
+        :hasCourseName "Database Management Systems" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "3.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN2500
+:IN2500 rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN2510
+:IN2510 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN2510" ;
+        :hasCourseName "Computer Networks" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN2511
+:IN2511 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN2511" ;
+        :hasCourseName "Computer Networks" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN2600
+:IN2600 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN2600" ;
+        :hasCourseName "Computer Graphics and Animation" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN2601
+:IN2601 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN2601" ;
+        :hasCourseName "Computer Graphics" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "3.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN2900
+:IN2900 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN2900" ;
+        :hasCourseName "Industry Based Project" ;
+        :hasCourseType "Core" ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN3000
+:IN3000 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN3000" ;
+        :hasCourseName "Industrial Training" ;
+        :hasCourseType "Core" ;
+        :hasNumberOfCredits "6.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN3100
+:IN3100 rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN3101
+:IN3101 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN3101" ;
+        :hasCourseName "Enterprise Application Development" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN3400
+:IN3400 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN3400" ;
+        :hasCourseName "Advanced Database Management Systems" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN3410
+:IN3410 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN3410" ;
+        :hasCourseName "Data Mining and Data Warehousing" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN3500
+:IN3500 rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN3520
+:IN3520 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN3520" ;
+        :hasCourseName "Internetworking" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN3600
+:IN3600 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN3600" ;
+        :hasCourseName "Digital Video Production" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN3900
+:IN3900 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN3900" ;
+        :hasCourseName "Independent Study" ;
+        :hasCourseType "Core" ;
+        :hasNumberOfCredits "2.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN4100
+:IN4100 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN4100" ;
+        :hasCourseName "Theory of Programming Languages" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN4110
+:IN4110 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN4110" ;
+        :hasCourseName "Network Programming" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN4300
+:IN4300 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN4300" ;
+        :hasCourseName "Embedded Systems" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN4310
+:IN4310 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN4310" ;
+        :hasCourseName "IT Based Applications with Microcontrollers" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN4400
+:IN4400 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN4400" ;
+        :hasCourseName "Data Mining and Data Warehousing" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN4410
+:IN4410 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN4410" ;
+        :hasCourseName "Big Data Analytics" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN4411
+:IN4411 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN4411" ;
+        :hasCourseName "Big Data Analytics" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN4500
+:IN4500 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN4500" ;
+        :hasCourseName "Mobile and Wireless Networks" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN4510
+:IN4510 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN4510" ;
+        :hasCourseName "Computer and Network Security" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN4520
+:IN4520 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN4520" ;
+        :hasCourseName "High Speed Communication Networks" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN4521
+:IN4521 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN4521" ;
+        :hasCourseName "High Speed Communication Networks" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN4530
+:IN4530 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN4530" ;
+        :hasCourseName "Multimedia Communications" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN4540
+:IN4540 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN4540" ;
+        :hasCourseName "Performance Evaluation of Computer Networks" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN4550
+:IN4550 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN4550" ;
+        :hasCourseName "Cyber Security" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN4600
+:IN4600 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN4600" ;
+        :hasCourseName "Multimedia Systems" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN4610
+:IN4610 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN4610" ;
+        :hasCourseName "Multimedia Programming" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN4620
+:IN4620 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN4620" ;
+        :hasCourseName "Digital Image Processing" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN4621
+:IN4621 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN4621" ;
+        :hasCourseName "Digital Image Processing" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN4630
+:IN4630 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN4630" ;
+        :hasCourseName "Game Theory" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN4640
+:IN4640 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN4640" ;
+        :hasCourseName "Machine Vision" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN4700
+:IN4700 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN4700" ;
+        :hasCourseName "Cluster Computing" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN4710
+:IN4710 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN4710" ;
+        :hasCourseName "Human Computer Interaction" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN4720
+:IN4720 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN4720" ;
+        :hasCourseName "Geographic Information Systems" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN4721
+:IN4721 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN4721" ;
+        :hasCourseName "Geographic Information Systems" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN4730
+:IN4730 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN4730" ;
+        :hasCourseName "High Performance Computing" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN4770
+:IN4770 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN4770" ;
+        :hasCourseName "Cloud Computing" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN4910
+:IN4910 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN4910" ;
+        :hasCourseName "Comprehensive Group Project" ;
+        :hasCourseType "Core" ;
+        :hasNumberOfCredits "10.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IN4920
+:IN4920 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IN4920" ;
+        :hasCourseName "Individual Research Project" ;
+        :hasCourseType "Elective" ;
+        :hasNumberOfCredits "6.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS1000
+:IS1000 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS1000" ;
+        :hasCourseName "Industry Reconnaissance" ;
+        :hasCourseType "Core" ;
+        :hasNumberOfCredits "1.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS1010
+:IS1010 rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS1011
+:IS1011 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS1011" ;
+        :hasCourseName "English" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "3.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS1020
+:IS1020 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS1020" ;
+        :hasCourseName "Principles of Economics" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS1030
+:IS1030 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS1030" ;
+        :hasCourseName "Sri Lankan Studies" ;
+        :hasCourseType "Core" ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS1100
+:IS1100 rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS1101
+:IS1101 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS1101" ;
+        :hasCourseName "Principles of Management" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS1210
+:IS1210 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS1210" ;
+        :hasCourseName "Financial Accounting" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS1400
+:IS1400 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS1400" ;
+        :hasCourseName "Information Systems Management" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS1900
+:IS1900 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS1900" ;
+        :hasCourseName "Business Project" ;
+        :hasCourseType "Core" ;
+        :hasNumberOfCredits "2.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS2000
+:IS2000 rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS2010
+:IS2010 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS2010" ;
+        :hasCourseName "Scientific Communication" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 3 ;
+        :hasLectureHours 1 ;
+        :hasNumberOfCredits "2.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS2200
+:IS2200 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS2200" ;
+        :hasCourseName "Principles of Marketing and Consumer Solutions" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS2210
+:IS2210 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS2210" ;
+        :hasCourseName "Management Accounting" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS2220
+:IS2220 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS2220" ;
+        :hasCourseName "Essentials of Law" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS2300
+:IS2300 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS2300" ;
+        :hasCourseName "Principles of Marketing" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS2900
+:IS2900 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS2900" ;
+        :hasCourseName "Project on IT Applications" ;
+        :hasCourseType "Core" ;
+        :hasNumberOfCredits "2.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS3000
+:IS3000 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS3000" ;
+        :hasCourseName "Industrial Training" ;
+        :hasCourseType "Core" ;
+        :hasNumberOfCredits "6.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS3010
+:IS3010 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS3010" ;
+        :hasCourseName "Communication Skills" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 3 ;
+        :hasLectureHours 1 ;
+        :hasNumberOfCredits "2.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS3020
+:IS3020 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS3020" ;
+        :hasCourseName "Human Communication and Language Structures" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS3100
+:IS3100 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS3100" ;
+        :hasCourseName "Organizational Behaviour" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS3110
+:IS3110 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS3110" ;
+        :hasCourseName "Strategic Management" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS3230
+:IS3230 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS3230" ;
+        :hasCourseName "Social Aspects of IT" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS3400
+:IS3400 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS3400" ;
+        :hasCourseName "Management Information Systems" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS3420
+:IS3420 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS3420" ;
+        :hasCourseName "Software Management" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS3430
+:IS3430 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS3430" ;
+        :hasCourseName "IT Project Management" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS3440
+:IS3440 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS3440" ;
+        :hasCourseName "IT Quality Assurance" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS3450
+:IS3450 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS3450" ;
+        :hasCourseName "Business and Entrepreneurship" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS3610
+:IS3610 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS3610" ;
+        :hasCourseName "Management Information Systems" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS3700
+:IS3700 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS3700" ;
+        :hasCourseName "IT Project Management" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS3710
+:IS3710 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS3710" ;
+        :hasCourseName "Behavioural Science I" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS3910
+:IS3910 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS3910" ;
+        :hasCourseName "Independent Study" ;
+        :hasCourseType "Core" ;
+        :hasNumberOfCredits "3.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS4010
+:IS4010 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS4010" ;
+        :hasCourseName "Appreciation of Literary Works" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 3 ;
+        :hasLectureHours 1 ;
+        :hasNumberOfCredits "2.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS4200
+:IS4200 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS4200" ;
+        :hasCourseName "Professional Practice" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS4210
+:IS4210 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS4210" ;
+        :hasCourseName "Management of Sensitive Projects" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS4230
+:IS4230 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS4230" ;
+        :hasCourseName "e-Governance" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS4300
+:IS4300 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS4300" ;
+        :hasCourseName "Marketing Management" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS4310
+:IS4310 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS4310" ;
+        :hasCourseName "Business Studies" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS4320
+:IS4320 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS4320" ;
+        :hasCourseName "eBusiness Management" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS4330
+:IS4330 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS4330" ;
+        :hasCourseName "Supply Chain Management" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS4340
+:IS4340 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS4340" ;
+        :hasCourseName "Innovation Management" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS4400
+:IS4400 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS4400" ;
+        :hasCourseName "Management of Technology" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS4410
+:IS4410 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS4410" ;
+        :hasCourseName "IT Infrastructure Management" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS4420
+:IS4420 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS4420" ;
+        :hasCourseName "Decision Management" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS4430
+:IS4430 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS4430" ;
+        :hasCourseName "Social Aspects of IT" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS4450
+:IS4450 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS4450" ;
+        :hasCourseName "Knowledge Management" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS4510
+:IS4510 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS4510" ;
+        :hasCourseName "e-Education" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS4600
+:IS4600 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS4600" ;
+        :hasCourseName "IT Quality Assurance" ;
+        :hasCourseType "Core" ;
+        :hasLabHours 1 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS4610
+:IS4610 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS4610" ;
+        :hasCourseName "Financial Engineering" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS4710
+:IS4710 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS4710" ;
+        :hasCourseName "Behavioural Science II" ;
+        :hasCourseType "Elective" ;
+        :hasLabHours 2 ;
+        :hasLectureHours 2 ;
+        :hasNumberOfCredits "2.5"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS4910
+:IS4910 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS4910" ;
+        :hasCourseName "Comprehensive Group Project" ;
+        :hasCourseType "Core" ;
+        :hasNumberOfCredits "10.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#IS4920
+:IS4920 rdf:type owl:NamedIndividual ,
+                 :Course ;
+        :hasCourseCode "IS4920" ;
+        :hasCourseName "Individual Research Project" ;
+        :hasCourseType "Elective" ;
+        :hasNumberOfCredits "6.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#Mr_Ruwan_Bandara
+:Mr_Ruwan_Bandara rdf:type owl:NamedIndividual ,
+                           :AcademicStaff ;
+                  :isMemberOf :Department_of_Information_Technology ;
+                  :teaches :IN1101 ,
+                           :IN2101 ,
+                           :IN2201 ;
+                  :hasEmail "ruwan.bandara@faculty.edu" ;
+                  :hasPersonName "Ruwan Bandara" ;
+                  :hasPosition "Lecturer" .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#Ms_Dilrukshi_Jayawardena
+:Ms_Dilrukshi_Jayawardena rdf:type owl:NamedIndividual ,
+                                   :AcademicStaff ;
+                          :isMemberOf :Department_of_Interdisciplinary_Studies ;
+                          :teaches :IS3420 ,
+                                   :IS3430 ,
+                                   :IS4200 ;
+                          :hasEmail "dilrukshi.jayawardena@faculty.edu" ;
+                          :hasPersonName "Dilrukshi Jayawardena" ;
+                          :hasPosition "Lecturer" .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#Msc_in_Artificial_Intelligence
+:Msc_in_Artificial_Intelligence rdf:type owl:NamedIndividual ,
+                                         :PostgraduateProgram ;
+                                :hasEnrolledStudents :Student_Amali_Jayaweera ;
+                                :hasProgramDuration 2 ;
+                                :hasProgramName "Msc in AI" .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#Msc_in_Information_Technology
+:Msc_in_Information_Technology rdf:type owl:NamedIndividual ,
+                                        :PostgraduateProgram ;
+                               :hasEnrolledStudents :Student_Sachith_Ranasinghe ;
+                               :hasProgramDuration 2 ;
+                               :hasProgramName "Msc in IT" .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#Prof_Amal_Perera
+:Prof_Amal_Perera rdf:type owl:NamedIndividual ,
+                           :AcademicStaff ;
+                  :isMemberOf :Department_of_Computational_Mathematics ;
+                  :teaches :CM3720 ,
+                           :CM4730 ;
+                  :hasEmail "amal.perera@faculty.edu" ;
+                  :hasPersonName "Amal Perera" ;
+                  :hasPosition "Professor" .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#Student_Amali_Jayaweera
+:Student_Amali_Jayaweera rdf:type owl:NamedIndividual ,
+                                  :PostgraduateStudent ;
+                         :hasAdvisor :Dr_Nishani_Silva ;
+                         :isMemberOf :Department_of_Computational_Mathematics ;
+                         :hasEmail "amali.jayaweera@student.edu" ;
+                         :hasPersonName "Amali Jayaweera" ;
+                         :hasRegistrationNumber "PG2023001" .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#Student_Gayan_Kumara
+:Student_Gayan_Kumara rdf:type owl:NamedIndividual ,
+                               :UndergraduateStudent ;
+                      :isMemberOf :Department_of_Interdisciplinary_Studies ;
+                      :hasEmail "gayan.kumara@student.edu" ;
+                      :hasPersonName "Gayan Kumara" ;
+                      :hasRegistrationNumber "UG2021003" .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#Student_Sachith_Ranasinghe
+:Student_Sachith_Ranasinghe rdf:type owl:NamedIndividual ,
+                                     :PostgraduateStudent ;
+                            :hasAdvisor :Dr_Kasun_Fernando ;
+                            :isMemberOf :Department_of_Information_Technology ;
+                            :hasEmail "sachith.ranasinghe@student.edu" ;
+                            :hasPersonName "Sachith Ranasinghe" ;
+                            :hasRegistrationNumber "PG2023002" .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#Student_Sanduni_Wijeratne
+:Student_Sanduni_Wijeratne rdf:type owl:NamedIndividual ,
+                                    :UndergraduateStudent ;
+                           :isMemberOf :Department_of_Information_Technology ;
+                           :hasEmail "sanduni.wijeratne@student.edu" ;
+                           :hasPersonName "Sanduni Wijeratne" ;
+                           :hasRegistrationNumber "UG2022002" .
+
+
+###  http://www.semanticweb.org/hevindutilakasena/ontologies/2026/1/untitled-ontology-13#Student_Tharindu_Bandara
+:Student_Tharindu_Bandara rdf:type owl:NamedIndividual ,
+                                   :UndergraduateStudent ;
+                          :isMemberOf :Department_of_Computational_Mathematics ;
+                          :hasEmail "tharindu.bandara@student.edu" ;
+                          :hasPersonName "Tharindu Bandara" ;
+                          :hasRegistrationNumber "UG2022001" .
+
+
+#################################################################
+#    Rules
+#################################################################
+
+:s rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+:p rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+:d rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+:a rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment ""^^xsd:string ;
+   rdfs:label "S1"^^xsd:string ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Student ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :s
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#classPredicate> :PostgraduateStudent ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> :s
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasEnrolledStudents ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> :p ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> :s
+                                                                           ] ;
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :offersProgram ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument1> :d ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument2> :p
+                                                                                      ] ;
+                                                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasAdvisor ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument1> :s ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument2> :a
+                                                                                                 ] ;
+                                                                                       rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                  rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#propertyPredicate> :isMemberOf ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#argument1> :a ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#argument2> :d
+                                                                                                            ] ;
+                                                                                                  rdf:rest rdf:nil
+                                                                                                ]
+                                                                                     ]
+                                                                          ]
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasAdvisor ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :s ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> :a
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+###  Generated by the OWL API (version 4.2.5.20160517-0735) https://github.com/owlcs/owlapi
